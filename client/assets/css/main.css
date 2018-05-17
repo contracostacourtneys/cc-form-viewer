@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+@import url('https://fonts.googleapis.com/css?family=Judson');
+
+
+html, body {
+  padding: 0vw;
+  margin: 0vw;
+
+  width: 100%;
+  height: 100%;
+
+  font-family: 'Source Sans Pro', Helvetica, Arial;
+  font-size: 1.3vw;
+}
+
+.main-app {
+  padding: 1vw;
+}
