@@ -35,6 +35,9 @@ module.exports = {
       Utility: path.resolve(__dirname, './client/assets/js/utility'),
 
       App: path.resolve(__dirname, './client/assets/js/App'),
+      Form: path.resolve(__dirname, './client/assets/js/Form'),
+      Components: path.resolve(__dirname, './client/assets/js/components'),
+      Textbox: path.resolve(__dirname, './client/assets/js/components/Textbox'),
     }
   }
 };
