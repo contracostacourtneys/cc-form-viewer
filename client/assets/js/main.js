@@ -10,6 +10,8 @@ import App from 'App/App.jsx';
 
 const reducers = combineReducers({
   global: require('App/reducer.js'),
+  forms: require('Form/reducer.js'),
+  textboxes: require('Textbox/reducer.js'),
 });
 
 // ------ Middleware stuff ------
