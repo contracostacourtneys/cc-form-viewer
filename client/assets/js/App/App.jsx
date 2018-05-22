@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import * as pdfWorker from 'pdfjs-dist/build/pdf.worker.entry';
 import PDFJS from 'pdfjs-dist';
+import * as pdfWorker from 'pdfjs-dist/build/pdf.worker.entry';
+
+import fromPDF from 'Utility/fromPDF';
+import Form from 'Form/Form.jsx';
+
+const uuid = require('uuid/v4');
 
 
 class App extends Component {
@@ -13,7 +18,7 @@ class App extends Component {
   componentWillMount () {
     PDFJS.getDocument('//localhost:3000/pdf/SC-100')
       .then((pdf) => {
-        console.dir(pdf);
+        fromPDF(pdf);
       })
       .catch((error) => {
         console.error('ERROR: PDFJS.getDocument() -', error);
@@ -21,9 +26,17 @@ class App extends Component {
   }
 
   render () {
+    const forms = this.props.forms;
+
     return (
       <div className='main-app'>
         App
+
+        {
+          forms.map((form, page) => {
+            return <Form page={page} key={uuid()} />;
+          })
+        }
       </div>
     );
   }
@@ -32,7 +45,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-
+    forms: state.forms
   };
 };
 
