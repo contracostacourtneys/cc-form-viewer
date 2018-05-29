@@ -38,6 +38,7 @@ module.exports = {
       Form: path.resolve(__dirname, './client/assets/js/Form'),
       Components: path.resolve(__dirname, './client/assets/js/components'),
       Textbox: path.resolve(__dirname, './client/assets/js/components/Textbox'),
+      Checkbox: path.resolve(__dirname, './client/assets/js/components/Checkbox'),
     }
   }
 };

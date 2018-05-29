@@ -45,11 +45,9 @@ const convertComponents = (components, pageIndex) => {
 
     // We don't want to deal with these; it's probably a button like "Print Form" or whatever
     if (component.pushButton) {
-      console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee!!!!!!');
+      console.log('pushButton', component);
       continue;
     }
-
-    console.dir(component);
 
     const rect = component.rect;
     const x = rect[0];

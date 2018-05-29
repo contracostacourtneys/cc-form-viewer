@@ -28,7 +28,7 @@ class App extends Component {
   render () {
     return (
       <div className='main-app'>
-        {this.props.forms.length <= 0 ? '' : <Form pageIndex={0} key={uuid()} />}
+        {this.props.forms.length <= 0 ? '' : <Form pageIndex={1} key={uuid()} />}
       </div>
     );
   }

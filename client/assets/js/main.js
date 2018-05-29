@@ -12,6 +12,7 @@ const reducers = combineReducers({
   global: require('App/reducer.js'),
   forms: require('Form/reducer.js'),
   textboxes: require('Textbox/reducer.js'),
+  checkboxes: require('Checkbox/reducer.js'),
 });
 
 // ------ Middleware stuff ------
