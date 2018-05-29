@@ -26,17 +26,9 @@ class App extends Component {
   }
 
   render () {
-    const forms = this.props.forms;
-
     return (
       <div className='main-app'>
-        App
-
-        {
-          forms.map((form, page) => {
-            return <Form page={page} key={uuid()} />;
-          })
-        }
+        {this.props.forms.length <= 0 ? '' : <Form pageIndex={0} key={uuid()} />}
       </div>
     );
   }

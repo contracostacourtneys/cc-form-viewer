@@ -4,6 +4,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "cors": "^2.8.4",
+    "deepcopy": "^0.6.3",
     "express": "^4.16.3",
     "has-own-property-x": "^3.2.0",
     "js-beautify": "^1.7.5",
