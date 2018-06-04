@@ -1,5 +1,6 @@
 import { addToState, removeFromState } from 'Components/shared/addRemove';
-import validateComponent from 'Components/shared/validateComponent';
+import validateComponent, { typeCheck } from 'Components/shared/validateComponent';
+import setValue from 'Components/shared/setValue';
 
 const defaultState = {};
 
@@ -16,6 +17,11 @@ module.exports = (state = defaultState, action) => {
 
     case 'REMOVE_COMPONENT': {
       return removeFromState(state, action.payload, 'Checkbox');
+    }
+
+    case 'SET_COMPONENT_VALUE': {
+      const { id, type, value } = action.payload;
+      return setValue(state, 'Checkbox', id, type, value);
     }
   }
 

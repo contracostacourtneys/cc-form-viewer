@@ -5,6 +5,8 @@ import PDFJS from 'pdfjs-dist';
 import * as pdfWorker from 'pdfjs-dist/build/pdf.worker.entry';
 
 import fromPDF from 'Utility/fromPDF';
+
+import Topbar from 'App/Topbar.jsx';
 import Form from 'Form/Form.jsx';
 
 const uuid = require('uuid/v4');
@@ -28,7 +30,11 @@ class App extends Component {
   render () {
     return (
       <div className='main-app'>
-        {this.props.forms.length <= 0 ? '' : <Form pageIndex={1} key={uuid()} />}
+        <Topbar />
+        {
+          this.props.forms.length <= 0 ? ''
+            : <Form pageIndex={this.props.currentPage} key={this.props.currentPage} />
+        }
       </div>
     );
   }
@@ -37,7 +43,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    forms: state.forms
+    currentPage: state.global.currentPage,
+    forms: state.forms,
   };
 };
 

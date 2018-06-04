@@ -22,4 +22,13 @@ const validateComponent = (payload, type) => {
   return true;
 };
 
+const typeCheck = (typeToCheck, id, type) => {
+  if (!validatePayload({ id, type }, ['id', 'type'])) {
+    return false;
+  }
+  
+  return typeToCheck === type;
+};
+
 export default validateComponent;
+export { typeCheck };

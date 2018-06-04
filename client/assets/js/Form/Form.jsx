@@ -24,9 +24,13 @@ class Form extends Component {
     const form = this.props.forms[pageIndex] || '';
 
     if (form === '') {
+      // FIXME: hahahahaha this codebase is such a clusterfuck already
+      // This >>IS NOT<< the way to do this properly and I'm perfectly aware of that
+      setTimeout(this.componentDidMount.bind(this), 1000);
       return;
     }
 
+    // REALLY not good
     this.setState({
       pageView: new PDFPageView({
         id: pageIndex,
@@ -37,6 +41,7 @@ class Form extends Component {
       })
     });
 
+    // bad bad bad bad
     setTimeout(() => {
       this.state.pageView.setPdfPage(form.page);
       this.state.pageView.draw();
@@ -65,10 +70,10 @@ class Form extends Component {
             }
 
             if (component.type === 'Textbox') {
-              return <Textbox key={uuid()} { ...component } />;
+              return <Textbox key={`Textbox-${pageIndex}-${index}`} { ...component } />;
             }
             else if (component.type === 'Checkbox') {
-              return <Checkbox key={uuid()} { ...component } />;
+              return <Checkbox key={`Checkbox-${pageIndex}-${index}`} { ...component } />;
             }
           })
         }
