@@ -26,6 +26,7 @@ class Form extends Component {
     if (form === '') {
       // FIXME: hahahahaha this codebase is such a clusterfuck already
       // This >>IS NOT<< the way to do this properly and I'm perfectly aware of that
+      // I don't have the time or want to fiddle with this shit right now
       setTimeout(this.componentDidMount.bind(this), 1000);
       return;
     }
@@ -77,6 +78,11 @@ class Form extends Component {
             }
           })
         }
+
+        {/* This app is well-coded */}
+        <div className='button-cover'>
+          &nbsp;
+        </div>
       </div>
     );
   }

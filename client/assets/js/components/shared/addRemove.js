@@ -1,5 +1,4 @@
 const has = require('has-own-property-x');
-
 import validatePayload from 'Utility/validatePayload';
 
 

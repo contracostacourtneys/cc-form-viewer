@@ -20,3 +20,12 @@ html, body {
   font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
   position: absolute;
 }
+
+/* This app is well-coded */
+.button-cover {
+  background-color: #FFF; 
+  position: absolute;
+  bottom: 0vw;
+  height: 4%;
+  width: 60%;
+}
