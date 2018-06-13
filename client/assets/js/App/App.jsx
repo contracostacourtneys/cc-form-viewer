@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import axios from 'axios';
+
 import PDFJS from 'pdfjs-dist';
 import * as pdfWorker from 'pdfjs-dist/build/pdf.worker.entry';
 
@@ -18,13 +20,7 @@ class App extends Component {
   }
 
   componentWillMount () {
-    PDFJS.getDocument('//localhost:3000/pdf/SC-100')
-      .then((pdf) => {
-        fromPDF(pdf);
-      })
-      .catch((error) => {
-        console.error('ERROR: PDFJS.getDocument() -', error);
-      });
+    
   }
 
   render () {
