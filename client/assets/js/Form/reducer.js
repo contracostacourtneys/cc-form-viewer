@@ -10,7 +10,7 @@ module.exports = (state = defaultState, action) => {
     case 'ADD_FORM': {
       const data = action.payload;
 
-      if (!validatePayload(data, ['id', 'page', 'viewport'])) {
+      if (!validatePayload(data, ['id', 'pageNumber', 'viewport'])) {
         return state;
       }
 

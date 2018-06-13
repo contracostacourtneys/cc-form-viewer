@@ -50,8 +50,25 @@ module.exports = (express, server, database) => {
         res.sendStatus(statusCode);
         return;
       }
-
-
     });
+  });
+
+  server.get('/pdf/:pdfName', (req, res) => {
+    let pdfName = req.params.pdfName || '';
+
+    if (pdfName === '') {
+      res.sendStatus(404);
+      return;
+    }
+
+    pdfName = pdfName.toUpperCase();
+    const pdfPath = path.join(__dirname, `../${formPaths[pdfName]}.pdf`);
+
+    if (!fs.existsSync(pdfPath)) {
+      res.sendStatus(404);
+      return;
+    }
+
+    res.sendFile(pdfPath);
   });
 };

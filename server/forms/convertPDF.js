@@ -6,13 +6,14 @@ const beautify = require('js-beautify').js_beautify;
 const Canvas = require('canvas');
 const Image = Canvas.Image;
 
-const NodeCanvasFactory = require('./NodeCanvasFactory.js');
+// const NodeCanvasFactory = require('./NodeCanvasFactory.js');
 
 
 const convertPDF = (name, pdf, callback) => {
   const converted = {
     name,
     forms: [],
+    components: {}
   };
 
   const numPages = pdf.numPages;
@@ -24,13 +25,12 @@ const convertPDF = (name, pdf, callback) => {
         id: `Page_${i}`,
         pageNumber: i,
         viewport: page.getViewport(1.0),
-        components: {},
       };
 
       converted.forms.push(form);
 
       page.getAnnotations().then((annotations) => {
-        convertComponents(form, annotations, i - 1);
+        convertComponents(converted.components, annotations, i - 1);
         pagesLeft--;
 
         if (pagesLeft <= 0) {
@@ -40,6 +40,7 @@ const convertPDF = (name, pdf, callback) => {
       .catch((error) => console.error('page.getAnnotations() - ERROR:', error));
 
 
+      // Fonts are broken so never mind
       /*const canvasFactory = new NodeCanvasFactory();
       const scale = 2;
       const canvasAndContext = canvasFactory.create(form.viewport.width * scale, form.viewport.height * scale);
@@ -51,8 +52,6 @@ const convertPDF = (name, pdf, callback) => {
       };
 
       canvasAndContext.context.scale(scale, scale);
-
-      console.log('hello yes');
 
       page.render(renderContext).then(() => {
         const image = canvasAndContext.canvas.toBuffer();
@@ -78,7 +77,7 @@ const convertFieldType = (fieldType) => {
   return '';
 };
 
-const convertComponents = (form, components, pageIndex) => {
+const convertComponents = (componentsObj, components, pageIndex) => {
   const length = components.length;
 
   for (let i = 0; i < length; i++) {
@@ -122,7 +121,7 @@ const convertComponents = (form, components, pageIndex) => {
       converted.multiline = true;
     }
 
-    form.components[component.id] = converted;
+    componentsObj[component.id] = converted;
   }
 };
 
