@@ -8,4 +8,11 @@ const addForm = (form) => {
   });
 };
 
-export { addForm };
+const addFormPage = (pageIndex, page) => {
+  store.dispatch({
+    type: 'ADD_FORM_PAGE',
+    payload: { pageIndex, page }
+  });
+};
+
+export { addForm, addFormPage };

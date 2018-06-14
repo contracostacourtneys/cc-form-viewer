@@ -7,6 +7,7 @@ import PDFJS from 'pdfjs-dist';
 import * as pdfWorker from 'pdfjs-dist/build/pdf.worker.entry';
 
 import fromJSON from 'Utility/fromJSON';
+import fromPDF from 'Utility/fromPDF';
 
 import Topbar from 'App/Topbar.jsx';
 import Form from 'Form/Form.jsx';
@@ -32,12 +33,18 @@ class App extends Component {
       axios.get(config.database.addresses.forms + formID)
         .then((result) => {
           fromJSON(result.data);
+
+          PDFJS.getDocument(config.database.addresses.PDFs + formID)
+            .then((pdf) => {
+              fromPDF(pdf);
+            })
+            .catch((error) => {
+              console.error('Error fetching PDF:', error);
+            });
         })
         .catch((error) => {
-          console.error('Error Fetching Form Data:', error)
+          console.error('Error fetching form data:', error)
         });
-
-      PDFJS.getDocument('//localhost:3000/pdf/SC-100');
     }
   }
 

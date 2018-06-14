@@ -37,6 +37,18 @@ module.exports = (state = defaultState, action) => {
 
       return forms;
     }
+
+    // Add the page object -- not the best thing to do but oh well
+    case 'ADD_FORM_PAGE': {
+      const { pageIndex, page } = action.payload;
+      const form = { ...state[pageIndex] };
+      form.page = page;
+
+      const formsArr = state.slice();
+      formsArr[pageIndex] = form;
+
+      return formsArr;
+    }
   }
 
   return state;
