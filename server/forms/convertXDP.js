@@ -7,8 +7,6 @@ const { parseString } = require('xml2js');
 const { promisify } = require('util');
 const parseStringAsync = promisify(parseString);
 
-const putForm = require('./putForm.js');
-
 const SVG_NAMESPACE = 'http://www.w3.org/2000/svg';
 
 
@@ -67,12 +65,6 @@ const convertXDP = (database, formName, filePath, callback) => {
   filePath = path.join(__dirname, '../' + filePath);
 
   fs.readFile(filePath + '.xdp').then((data) => {
-    /*if (readError) {
-      console.error('Read Error:', readError);
-      callback(500, '');
-      return;
-    }*/
-
     parseString(data, (parseError, result) => {
       if (parseError) {
         console.error('Parse Error:', parseError);
@@ -87,10 +79,11 @@ const convertXDP = (database, formName, filePath, callback) => {
 
       fs.writeFile(filePath + '.json', beautify(JSON.stringify(form), style))
         .then((result) => {
-          console.log('wtf', result);
+          callback(200, result);
         })
         .catch((writeError) => {
           console.error('Write Error:', writeError);
+          callback(500, '');
         });
       });
     })
