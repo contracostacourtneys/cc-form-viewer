@@ -1,7 +1,7 @@
 const has = require('has-own-property-x');
 
 
-const getForm = (database = '', formName = '', callback = '') => {
+const getForm = (database = '', formID = '', callback = '') => {
   if (callback === '') {
     return;
   }
@@ -11,13 +11,15 @@ const getForm = (database = '', formName = '', callback = '') => {
     return;
   }
 
-  if (formName === '') {
+  if (formID === '') {
     callback(400, '');
     return;
   }
 
-  database.get(`form_${formName}`, (err, result) => {
+  database.get(`form_${formID}`, (err, result) => {
     if (err) {
+      console.error('Error retrieving form:', err);
+      
       if (err.notFound) {
         callback(404, result);
         return;

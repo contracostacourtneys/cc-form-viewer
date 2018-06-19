@@ -1,18 +1,19 @@
 const has = require('has-own-property-x');
 
 
-const putForm = (database = '', name = '', formData = '', callback = '') => {
+const putForm = (database = '', formID = '', formData = '', callback = '') => {
   if (callback === '') {
     return;
   }
 
-  if (database === '' || name === '' || formData === '') {
+  if (database === '' || formID === '' || formData === '') {
     callback(500, '');
     return;
   }
 
-  database.put(`form_${name}`, formData, (err, result) => {
+  database.put(`form_${formID}`, JSON.stringify(formData), (err, result) => {
     if (err) {
+      console.error('Error adding converted form to database:', err);
       callback(500, '');
       return;
     }

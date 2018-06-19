@@ -85,7 +85,6 @@ const convertComponents = (componentsObj, components, pageIndex) => {
 
     // We don't want to deal with these; it's probably a button like "Print Form" or whatever
     if (component.pushButton) {
-      // console.log('pushButton', component);
       continue;
     }
 
@@ -98,6 +97,7 @@ const convertComponents = (componentsObj, components, pageIndex) => {
     const converted = {
       id: component.id,
       type: convertFieldType(component.fieldType),
+      pdf_fieldName: component.fieldName,
 
       multiline: component.multiline || false,
 

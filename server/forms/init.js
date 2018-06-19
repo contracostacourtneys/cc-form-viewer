@@ -10,7 +10,8 @@ module.exports = (express, server) => {
 
   database.createReadStream()
     .on('data', (data) => {
-      console.log(data.key, '=', data.value);
+      const value = data.value || '';
+      console.log(data.key, '=', `${value.substring(0, 32)} ...`);
     })
     .on('error', (err) => {
       console.error('ERROR: createReadStream() -', err);

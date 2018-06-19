@@ -7,8 +7,10 @@ const Image = Canvas.Image;
 
 const formPaths = require('./formPaths.js');
 const getForm = require('./getForm.js');
+const putForm = require('./putForm.js');
 const convertPDF = require('./convertPDF.js');
-const convertXDP = require('./convertXDP.js');
+// const convertXDP = require('./convertXDP.js');
+const addFieldNames = require('./addFieldNames.js');
 
 const PDFJS = require('pdfjs-dist');
 
@@ -25,9 +27,8 @@ module.exports = (express, server, database) => {
     formID = formID.toUpperCase();
     const formPath = formPaths[formID];
 
-    getForm(database, `form_${formID}`, (statusCode, result) => {
+    getForm(database, formID, (statusCode, result) => {
       if (statusCode === 404) {
-        // convertXDP(database, formID, formPath, (err, result) => console.log('idk lol', err, result));
         const pdfPath = path.join(__dirname, `../${formPath}.pdf`);
         const pdfRaw = new Uint8Array(fs.readFileSync(pdfPath));
 
@@ -39,16 +40,23 @@ module.exports = (express, server, database) => {
                 return;
               }
 
+              addFieldNames(conversionResult);
+              putForm(database, formID, conversionResult, () => {});
+
               res.send(JSON.stringify(conversionResult));
             });
           })
           .catch((error) => {
             console.log('Error reading PDF:', error);
+            res.sendStatus(500);
           });
       }
       else if (statusCode !== 200) {
         res.sendStatus(statusCode);
         return;
+      }
+      else {
+        res.send(result);
       }
     });
   });
