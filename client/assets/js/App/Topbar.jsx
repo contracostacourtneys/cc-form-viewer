@@ -14,7 +14,8 @@ class Topbar extends Component {
       <div className='topbar'>
         <input 
           type='button'
-          value='< Previous'
+          className='button'
+          value={'\u276E  Previous'}
 
           onClick={previousPage}
 
@@ -23,7 +24,8 @@ class Topbar extends Component {
 
         <input 
           type='button'
-          value='Next >'
+          className='button'
+          value={'Next  \u276F'}
 
           onClick={nextPage}
 

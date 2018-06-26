@@ -27,6 +27,9 @@ class App extends Component {
   componentWillMount () {
     const search = queryString.parse(window.location.search);
 
+    // To use this app, you want to add /?form=FORM_NAME for it to run properly
+    // e.g http://localhost:3000/?form=SC-100
+
     if (has(search, 'form')) {
       const formID = search.form.replace(/\//g, '');  // Remove trailing slash(es)
 
@@ -34,6 +37,10 @@ class App extends Component {
         .then((result) => {
           fromJSON(result.data);
 
+          // We still have to draw the image on canvas in real-time because fonts get
+          // messed up if we try to pre-render them on the server-side
+
+          // Until I can find a solution, this is what we have to work with
           PDFJS.getDocument(config.database.addresses.PDFs + formID)
             .then((pdf) => {
               fromPDF(pdf);

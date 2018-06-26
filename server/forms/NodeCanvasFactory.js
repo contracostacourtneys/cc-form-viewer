@@ -1,3 +1,5 @@
+// Unused file
+
 const Canvas = require('canvas');
 const Image = Canvas.Image;
 

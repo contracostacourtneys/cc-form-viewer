@@ -26,7 +26,7 @@ class Form extends Component {
     if (form === '') {
       // FIXME: hahahahaha this codebase is such a clusterfuck already
       // This >>IS NOT<< the way to do this properly and I'm perfectly aware of that
-      // I don't have the time or want to fiddle with this shit right now
+      // But we're being laid off anyway so it doesn't really matter
       setTimeout(this.componentDidMount.bind(this), 1000);
       return;
     }
@@ -61,7 +61,7 @@ class Form extends Component {
     const formComponents = form.components;
 
     return (
-      <div id={`--Form--Page_${pageIndex}--`} style={{ position: 'relative' }}>
+      <div id={`--Form--Page_${pageIndex}--`} className='form'>
         {
           formComponents.map((formComponent, index) => {
             const component = components[formComponent.id];
@@ -79,7 +79,8 @@ class Form extends Component {
           })
         }
 
-        {/* This app is well-coded */}
+        {/* Used to cover "Print this form" etc. buttons
+            This app is well-coded */}
         <div className='button-cover'>
           &nbsp;
         </div>
